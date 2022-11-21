@@ -1,11 +1,12 @@
 const express = require('express');
+const helmet = require('helmet');
+
 const app = express();
-
-
-
-
-
-
+app.use(helmet.hidePoweredBy()); //Hide Potentially Dangerous Information
+app.use(helmet.frameguard({action: 'deny'})); //Risk of Clickjacking
+app.use(helmet.xssFilter()); //Risk of Cross Site Scripting (XSS) Attacks
+app.use(helmet.noSniff()); //Avoid Inferring the Response MIME Type
+app.use(helmet.ieNoOpen()); //Prevent IE from Opening Untrusted HTML
 
 
 
